@@ -1,115 +1,73 @@
-"use client";
-
-import { useState } from 'react';
-import Image from 'next/image';
-import { motion } from 'framer-motion';
+import {
+    MapIcon,
+    ShoppingBagIcon,
+    CursorArrowRaysIcon,
+    ChartBarIcon,
+    UserGroupIcon,
+    DevicePhoneMobileIcon
+} from '@heroicons/react/24/outline';
 
 const features = [
     {
-        title: "Advanced Body Mapping",
-        description: "Revolutionary technology that allows clients to visualize tattoos on their body before committing to ink, reducing revision requests by 85%.",
-        icon: "bodymap-icon.svg",
-        image: "/images/features/body-map-demo.jpg",
-        color: "bg-indigo-100"
+        name: 'Advanced Body Mapping',
+        description: 'Interactive body mapping software that allows precise tattoo placement visualization and planning. Perfect for consultations and design approval.',
+        icon: MapIcon,
+        highlight: 'Core Technology',
     },
     {
-        title: "Client Management",
-        description: "Comprehensive CRM system designed specifically for tattoo studios, tracking client preferences, appointment history, and aftercare instructions.",
-        icon: "client-icon.svg",
-        image: "/images/features/client-management.jpg",
-        color: "bg-emerald-100"
+        name: 'Tattoo Finder Tool',
+        description: 'Sophisticated search and discovery system helping clients find their perfect tattoo design from extensive galleries and artist portfolios.',
+        icon: CursorArrowRaysIcon,
+        highlight: 'Client Experience',
     },
     {
-        title: "Scheduling & Bookings",
-        description: "Streamline your appointment process with our intelligent booking system that reduces no-shows by 32% and optimizes artist availability.",
-        icon: "calendar-icon.svg",
-        image: "/images/features/scheduling.jpg",
-        color: "bg-amber-100"
+        name: 'Premium Merchandise Platform',
+        description: 'Complete e-commerce solution featuring trending tattoo-inspired apparel, accessories, and aftercare products with seamless ordering.',
+        icon: ShoppingBagIcon,
+        highlight: 'Revenue Stream',
     },
     {
-        title: "Business Analytics",
-        description: "Data-driven insights into your studio's performance, popular designs, and client demographics to make informed business decisions.",
-        icon: "analytics-icon.svg",
-        image: "/images/features/analytics-dashboard.jpg",
-        color: "bg-rose-100"
-    }
+        name: 'Studio Management Dashboard',
+        description: 'Comprehensive analytics and management tools for tracking appointments, client preferences, and business performance metrics.',
+        icon: ChartBarIcon,
+        highlight: 'Business Intelligence',
+    },
+    {
+        name: 'Client Portfolio System',
+        description: 'Organized client management with design history, appointment tracking, and personalized recommendation engine.',
+        icon: UserGroupIcon,
+        highlight: 'Client Relations',
+    },
+    {
+        name: 'Mobile-Optimized Experience',
+        description: 'Fully responsive platform ensuring seamless experience across all devices for both artists and clients.',
+        icon: DevicePhoneMobileIcon,
+        highlight: 'Accessibility',
+    },
 ];
 
 export default function FeatureShowcase() {
-    const [activeFeature, setActiveFeature] = useState(0);
-
     return (
         <div className="mt-16">
-            <div className="lg:grid lg:grid-cols-12 lg:gap-8">
-                {/* Feature tabs */}
-                <div className="lg:col-span-5">
-                    <div className="px-4 sm:px-0 space-y-1">
-                        {features.map((feature, index) => (
-                            <button
-                                key={index}
-                                onClick={() => setActiveFeature(index)}
-                                className={`relative w-full flex items-start p-4 rounded-xl transition-all duration-300 ${
-                                    activeFeature === index
-                                        ? 'bg-white shadow-lg'
-                                        : 'hover:bg-gray-100'
-                                }`}
-                            >
-                                <div className={`flex-shrink-0 inline-flex p-3 rounded-lg ${feature.color}`}>
-                                    <Image
-                                        src={`/images/icons/${feature.icon}`}
-                                        alt={feature.title}
-                                        width={24}
-                                        height={24}
-                                    />
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                {features.map((feature) => (
+                    <div key={feature.name} className="relative group">
+                        <div className="flex flex-col bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 h-full border-l-4 border-[#146C43]">
+                            <div className="flex items-center">
+                                <div className="flex-shrink-0">
+                                    <feature.icon className="h-8 w-8 text-[#146C43]" aria-hidden="true" />
                                 </div>
-                                <div className="ml-4 text-left">
-                                    <h3 className={`text-lg font-medium ${
-                                        activeFeature === index ? 'text-gray-900' : 'text-gray-700'
-                                    }`}>
-                                        {feature.title}
-                                    </h3>
-                                    <p className={`mt-1 ${
-                                        activeFeature === index ? 'text-gray-600' : 'text-gray-500'
-                                    }`}>
-                                        {feature.description}
-                                    </p>
+                                <div className="ml-4">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#146C43] text-white">
+                    {feature.highlight}
+                  </span>
                                 </div>
-                                {activeFeature === index && (
-                                    <div className="hidden lg:block absolute right-2 inset-y-0 h-full">
-                                        <svg width="12" height="100%" viewBox="0 0 12 100" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-                                            <path d="M1 1L11 50L1 99" stroke="#9333EA" strokeWidth="2" strokeLinecap="round"/>
-                                        </svg>
-                                    </div>
-                                )}
-                            </button>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Feature image */}
-                <div className="mt-10 lg:mt-0 lg:col-span-7">
-                    <motion.div
-                        key={activeFeature}
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="relative rounded-2xl overflow-hidden shadow-xl aspect-w-5 aspect-h-3"
-                    >
-                        <Image
-                            src={features[activeFeature].image}
-                            alt={features[activeFeature].title}
-                            fill
-                            className="object-cover"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
-                            <div className="p-6 w-full">
-                                <h3 className="text-xl font-medium text-white">
-                                    {features[activeFeature].title}
-                                </h3>
                             </div>
+                            <h3 className="mt-4 text-lg font-medium text-gray-900">{feature.name}</h3>
+                            <p className="mt-2 text-base text-gray-500 flex-grow">{feature.description}</p>
                         </div>
-                    </motion.div>
-                </div>
+                    </div>
+                ))}
             </div>
         </div>
     );

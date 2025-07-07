@@ -1,54 +1,83 @@
-import Link from 'next/link';
+'use client';
+
+import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Hero() {
-    return (
-        <div className="relative bg-white overflow-hidden">
-            <div className="max-w-7xl mx-auto">
-                <div className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
-                    <svg
-                        className="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2"
-                        fill="currentColor"
-                        viewBox="0 0 100 100"
-                        preserveAspectRatio="none"
-                        aria-hidden="true"
-                    >
-                        <polygon points="50,0 100,0 50,100 0,100" />
-                    </svg>
+    const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
-                    <main className="pt-10 mx-auto max-w-7xl px-4 sm:pt-12 sm:px-6 md:pt-16 lg:pt-20 lg:px-8 xl:pt-28">
-                        <div className="sm:text-center lg:text-left">
-                            <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-                                <span className="block xl:inline">Transform your</span>{' '}
-                                <span className="block text-purple-600 xl:inline">tattoo business</span>
-                            </h1>
-                            <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                                Elevate your tattoo studio with CIWUW's advanced body mapping technology and business management tools. Increase client satisfaction, streamline operations, and boost your revenue.
-                            </p>
-                            <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-                                <div className="rounded-md shadow">
-                                    <Link href="/contact" className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 md:py-4 md:text-lg md:px-10">
-                                        Request a Demo
-                                    </Link>
-                                </div>
-                                <div className="mt-3 sm:mt-0 sm:ml-3">
-                                    <Link href="/features" className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-purple-700 bg-purple-100 hover:bg-purple-200 md:py-4 md:text-lg md:px-10">
-                                        Explore Features
-                                    </Link>
+    return (
+        <div className="relative bg-gray-900 overflow-hidden">
+            {/* Background with CIWUW styling */}
+            <div
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40"
+                style={{
+                    backgroundImage: "url('https://res.cloudinary.com/dz00iux5j/image/private/s--5QXOzcEq--/v1727115364/bg-gif_1_kuglie.gif')"
+                }}
+            />
+
+            <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+                <div className="lg:grid lg:grid-cols-12 lg:gap-8 items-center">
+                    <div className="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
+                        {/* CIWUW Logo */}
+                        <div className="mb-8">
+                            <img
+                                src="/ciwuw-logo.png"
+                                alt="CIWUW - Call It What U Wanna"
+                                className="h-16 w-auto"
+                            />
+                        </div>
+
+                        <h1 className="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl">
+                            <span className="block">Revolutionize Your</span>
+                            <span className="block text-[#146C43]">Tattoo Business</span>
+                        </h1>
+
+                        <p className="mt-3 text-base text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
+                            CIWUW (Call It What U Wanna) is the premier tattoo platform offering
+                            advanced body mapping technology, premium tattoo merchandise, and comprehensive
+                            studio management tools. Transform how you design, visualize, and deliver tattoos.
+                        </p>
+
+                        <div className="mt-8 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0">
+                            <div className="flex flex-col sm:flex-row gap-4">
+                                <Link
+                                    href="#licensing-form"
+                                    className="w-full sm:w-auto flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#146C43] hover:bg-[#0d5233] md:py-4 md:text-lg md:px-10 transition-colors"
+                                >
+                                    Get Licensed Access
+                                </Link>
+                                <Link
+                                    href="#platform-demo"
+                                    className="w-full sm:w-auto flex items-center justify-center px-8 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10 transition-colors"
+                                >
+                                    View Platform Demo
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="mt-12 relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
+                        <div className="relative mx-auto w-full rounded-lg shadow-lg lg:max-w-md">
+                            <div className="relative block w-full bg-white rounded-lg overflow-hidden">
+                                <img
+                                    className="w-full h-64 object-cover"
+                                    src="https://res.cloudinary.com/dz00iux5j/image/private/s--4ZCve0ex--/v1727379924/mens-col-image2_h1mrny.png"
+                                    alt="CIWUW Tattoo Platform Preview"
+                                />
+                                <div className="absolute inset-0 w-full h-full flex items-center justify-center">
+                                    <div className="bg-[#146C43] bg-opacity-80 rounded-full p-4">
+                                        <svg className="h-8 w-8 text-white" fill="currentColor" viewBox="0 0 84 84">
+                                            <circle opacity="0.9" cx="42" cy="42" r="42" fill="white"/>
+                                            <path d="M55.5039 40.3359L37.1094 28.0729C35.7803 27.1869 34 28.1396 34 29.737V54.263C34 55.8604 35.7803 56.8131 37.1094 55.9271L55.5038 43.6641C56.6913 42.8725 56.6913 41.1275 55.5039 40.3359Z"/>
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </main>
+                    </div>
                 </div>
-            </div>
-            <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-                <Image
-                    className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
-                    src="/images/hero-image.jpg"
-                    alt="Tattoo artist using CIWUW software"
-                    width={1000}
-                    height={800}
-                />
             </div>
         </div>
     );
